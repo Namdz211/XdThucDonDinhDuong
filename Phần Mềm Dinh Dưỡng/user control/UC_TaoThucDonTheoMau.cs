@@ -43,6 +43,14 @@ namespace Phần_Mềm_Dinh_Dưỡng.All_User_Control
                 new SqlParameter("@TenThucDon", tenThucDon)
             );
             dgvThucDon.DataSource = dt;
+            // Ẩn cột ID
+            dgvThucDon.Columns["ID"].Visible = false;
+
+            // Ẩn cột NhomTre
+            dgvThucDon.Columns["NhomTre"].Visible = false;
+
+            // Ẩn cột TenThucDon
+            dgvThucDon.Columns["TenThucDon"].Visible = false;
         }
 
         private DataTable GetData(string query, params SqlParameter[] parameters)
@@ -81,5 +89,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.All_User_Control
                 LoadThucDon(nhomTre, tenThucDon);
             }
         }
+         
+
     }
 }

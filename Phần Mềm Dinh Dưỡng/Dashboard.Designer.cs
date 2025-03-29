@@ -37,11 +37,12 @@
             this.btnKtraDD = new Guna.UI2.WinForms.Guna2Button();
             this.btnNguyenLieu = new Guna.UI2.WinForms.Guna2Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.PanelMinisize = new Guna.UI2.WinForms.Guna2Button();
-            this.btnExit = new Guna.UI2.WinForms.Guna2Button();
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.PanelMinisize = new Guna.UI2.WinForms.Guna2Button();
+            this.btnExit = new Guna.UI2.WinForms.Guna2Button();
+            this.uC_HuongDanSuDung1 = new Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung.UC_HuongDanSuDung();
             this.uC_TaoThucDonTheoMau1 = new Phần_Mềm_Dinh_Dưỡng.All_User_Control.UC_TaoThucDonTheoMau();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -170,6 +171,24 @@
             this.panel1.TabIndex = 2;
             this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             // 
+            // guna2Elipse1
+            // 
+            this.guna2Elipse1.BorderRadius = 30;
+            this.guna2Elipse1.TargetControl = this;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel2.Controls.Add(this.uC_TaoThucDonTheoMau1);
+            this.panel2.Controls.Add(this.uC_HuongDanSuDung1);
+            this.panel2.ForeColor = System.Drawing.Color.Red;
+            this.panel2.Location = new System.Drawing.Point(28, 138);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1882, 852);
+            this.panel2.TabIndex = 3;
+            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            // 
             // PanelMinisize
             // 
             this.PanelMinisize.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -203,29 +222,19 @@
             this.btnExit.TabIndex = 0;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // guna2Elipse1
+            // uC_HuongDanSuDung1
             // 
-            this.guna2Elipse1.BorderRadius = 30;
-            this.guna2Elipse1.TargetControl = this;
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.panel2.Controls.Add(this.uC_TaoThucDonTheoMau1);
-            this.panel2.ForeColor = System.Drawing.Color.Red;
-            this.panel2.Location = new System.Drawing.Point(28, 138);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1882, 852);
-            this.panel2.TabIndex = 3;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
+            this.uC_HuongDanSuDung1.Location = new System.Drawing.Point(-2, -2);
+            this.uC_HuongDanSuDung1.Name = "uC_HuongDanSuDung1";
+            this.uC_HuongDanSuDung1.Size = new System.Drawing.Size(1882, 852);
+            this.uC_HuongDanSuDung1.TabIndex = 0;
             // 
             // uC_TaoThucDonTheoMau1
             // 
-            this.uC_TaoThucDonTheoMau1.Location = new System.Drawing.Point(3, 3);
+            this.uC_TaoThucDonTheoMau1.Location = new System.Drawing.Point(-22, -30);
             this.uC_TaoThucDonTheoMau1.Name = "uC_TaoThucDonTheoMau1";
             this.uC_TaoThucDonTheoMau1.Size = new System.Drawing.Size(1923, 908);
-            this.uC_TaoThucDonTheoMau1.TabIndex = 0;
+            this.uC_TaoThucDonTheoMau1.TabIndex = 1;
             // 
             // Dashboard
             // 
@@ -264,5 +273,6 @@
         private Guna.UI2.WinForms.Guna2Elipse guna2Elipse1;
         private System.Windows.Forms.Panel panel2;
         private All_User_Control.UC_TaoThucDonTheoMau uC_TaoThucDonTheoMau1;
+        private Form_Quản_Lý_Chung.UC_HuongDanSuDung uC_HuongDanSuDung1;
     }
 }
