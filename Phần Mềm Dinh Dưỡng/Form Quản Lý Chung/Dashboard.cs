@@ -26,15 +26,29 @@ namespace Phần_Mềm_Dinh_Dưỡng
         {
             Application.Exit();
         }
-
-        private void btnHDSD_Click(object sender, EventArgs e)
+        private void Dashboard_Load(object sender, EventArgs e)
+                {
+                   
+                    uC_TaoThucDonTheoMau1.Visible = false;
+                    uC_TaoThucDonTuMonAn1.Visible = false;
+                    btnHDSD.PerformClick();
+                }
+     
+        
+        private void btnAddFromNganHangThucDon_Click(object sender, EventArgs e)
+        {
+            uC_TaoThucDonTheoMau1.Visible = true;
+            uC_TaoThucDonTheoMau1.BringToFront();
+        }
+        private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
         }
 
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        private void btnAddFromMonAn_Click(object sender, EventArgs e)
         {
-
+            uC_TaoThucDonTuMonAn1.Visible = true;
+            uC_TaoThucDonTuMonAn1.BringToFront();
         }
     }
 }

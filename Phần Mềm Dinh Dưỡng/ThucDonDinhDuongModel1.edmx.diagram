@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="deab322cda6f4f908312e566864ebfce" Name="Diagram1">
+        <EntityTypeShape EntityType="ThucDonDinhDuongModel.MonAn" Width="1.5" PointX="0.75" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThucDonDinhDuongModel.sysdiagram" Width="1.5" PointX="5.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThucDonDinhDuongModel.ThucDonNgay" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThucDonDinhDuongModel.ThucDonTuan" Width="1.5" PointX="5.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ThucDonDinhDuongModel.ThucDon" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Chieu_Chao" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Chieu_MonChinh" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Chieu_TrangMieng" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Chieu_TrangMieng_NhaTre" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Sang_Chao" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Sang_MonChinh" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Sang_TrangMieng" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Trua_Chao" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Trua_MonCanh" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Trua_MonMan" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Trua_MonRauCu" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Trua_TrangMieng" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK_Trua_TrangMieng_NhaTre" ManuallyRouted="false" />
+        <AssociationConnector Association="ThucDonDinhDuongModel.FK__ThucDonNg__ThucD__403A8C7D" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -28,15 +28,12 @@ namespace Phần_Mềm_Dinh_Dưỡng
         }
         private void Dashboard_Load(object sender, EventArgs e)
                 {
-                    uC_HuongDanSuDung1.Visible = false;
+                   
                     uC_TaoThucDonTheoMau1.Visible = false;
+                    uC_TaoThucDonTuMonAn1.Visible = false;
                     btnHDSD.PerformClick();
                 }
-        private void btnHDSD_Click(object sender, EventArgs e)
-        {
-            uC_HuongDanSuDung1.Visible = true;
-            uC_HuongDanSuDung1.BringToFront();
-        }
+     
         
         private void btnAddFromNganHangThucDon_Click(object sender, EventArgs e)
         {
@@ -46,6 +43,12 @@ namespace Phần_Mềm_Dinh_Dưỡng
         private void panel2_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void btnAddFromMonAn_Click(object sender, EventArgs e)
+        {
+            uC_TaoThucDonTuMonAn1.Visible = true;
+            uC_TaoThucDonTuMonAn1.BringToFront();
         }
     }
 }

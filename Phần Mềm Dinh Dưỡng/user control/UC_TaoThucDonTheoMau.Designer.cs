@@ -70,6 +70,9 @@
             this.cbNhomTre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cbNhomTre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cbNhomTre.ItemHeight = 30;
+            this.cbNhomTre.Items.AddRange(new object[] {
+            "Nhóm nhà trẻ",
+            "Nhóm mẫu giáo"});
             this.cbNhomTre.Location = new System.Drawing.Point(466, 77);
             this.cbNhomTre.Name = "cbNhomTre";
             this.cbNhomTre.Size = new System.Drawing.Size(226, 36);
@@ -97,6 +100,7 @@
             // 
             // dgvThucDon
             // 
+            this.dgvThucDon.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvThucDon.BackgroundColor = System.Drawing.Color.White;
             this.dgvThucDon.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.dgvThucDon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;

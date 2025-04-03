@@ -1,0 +1,887 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ThucDonDinhDuongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MonAn">
+          <Key>
+            <PropertyRef Name="TenMon" />
+          </Key>
+          <Property Name="MaMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenMon" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LoaiMon" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Thực đơn dinh dưỡng.dbo.ThucDon' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ThucDon">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="NhomTre" />
+            <PropertyRef Name="Thu" />
+            <PropertyRef Name="TenThucDon" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NhomTre" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Thu" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="Sang_MonChinh" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sang_TrangMieng" Type="nvarchar" MaxLength="100" />
+          <Property Name="Trua_MonMan" Type="nvarchar" MaxLength="100" />
+          <Property Name="Trua_MonCanh" Type="nvarchar" MaxLength="100" />
+          <Property Name="Trua_MonRauCu" Type="nvarchar" MaxLength="100" />
+          <Property Name="Trua_TrangMieng" Type="nvarchar" MaxLength="100" />
+          <Property Name="Chieu_MonChinh" Type="nvarchar" MaxLength="100" />
+          <Property Name="Chieu_TrangMieng" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sang_Chao" Type="nvarchar" MaxLength="100" />
+          <Property Name="Trua_Chao" Type="nvarchar" MaxLength="100" />
+          <Property Name="Trua_TrangMieng_NhaTre" Type="nvarchar" MaxLength="100" />
+          <Property Name="Chieu_Chao" Type="nvarchar" MaxLength="100" />
+          <Property Name="Chieu_TrangMieng_NhaTre" Type="nvarchar" MaxLength="100" />
+          <Property Name="TenThucDon" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ThucDonNgay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ThucDonTuanID" Type="int" />
+          <Property Name="Thu" Type="nvarchar" MaxLength="10" />
+          <Property Name="MonChinh" Type="nvarchar" MaxLength="100" />
+          <Property Name="MonMan" Type="nvarchar" MaxLength="100" />
+          <Property Name="MonCanh" Type="nvarchar" MaxLength="100" />
+          <Property Name="MonXao" Type="nvarchar" MaxLength="100" />
+          <Property Name="TrangMieng" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ThucDonTuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KhuVuc" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="TenThucDon" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__ThucDonNg__ThucD__403A8C7D">
+          <End Role="ThucDonTuan" Type="Self.ThucDonTuan" Multiplicity="0..1" />
+          <End Role="ThucDonNgay" Type="Self.ThucDonNgay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThucDonTuan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThucDonNgay">
+              <PropertyRef Name="ThucDonTuanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_Chao">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_Chao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_MonChinh">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_MonChinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_TrangMieng">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_TrangMieng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_TrangMieng_NhaTre">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_TrangMieng_NhaTre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sang_Chao">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Sang_Chao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sang_MonChinh">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Sang_MonChinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sang_TrangMieng">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Sang_TrangMieng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_Chao">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_Chao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_MonCanh">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_MonCanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_MonMan">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_MonMan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_MonRauCu">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_MonRauCu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_TrangMieng">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_TrangMieng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_TrangMieng_NhaTre">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_TrangMieng_NhaTre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="chon_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sua_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaMon" Type="int" Mode="In" />
+          <Parameter Name="TenMon" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoaiMon" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="them_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenMon" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoaiMon" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="xoa_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaMon" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ThucDonDinhDuongModelStoreContainer">
+          <EntitySet Name="MonAn" EntityType="Self.MonAn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThucDonNgay" EntityType="Self.ThucDonNgay" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThucDonTuan" EntityType="Self.ThucDonTuan" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThucDon" EntityType="Self.ThucDon" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ThucDon].[Id] AS [Id], 
+    [ThucDon].[NhomTre] AS [NhomTre], 
+    [ThucDon].[Thu] AS [Thu], 
+    [ThucDon].[Sang_MonChinh] AS [Sang_MonChinh], 
+    [ThucDon].[Sang_TrangMieng] AS [Sang_TrangMieng], 
+    [ThucDon].[Trua_MonMan] AS [Trua_MonMan], 
+    [ThucDon].[Trua_MonCanh] AS [Trua_MonCanh], 
+    [ThucDon].[Trua_MonRauCu] AS [Trua_MonRauCu], 
+    [ThucDon].[Trua_TrangMieng] AS [Trua_TrangMieng], 
+    [ThucDon].[Chieu_MonChinh] AS [Chieu_MonChinh], 
+    [ThucDon].[Chieu_TrangMieng] AS [Chieu_TrangMieng], 
+    [ThucDon].[Sang_Chao] AS [Sang_Chao], 
+    [ThucDon].[Trua_Chao] AS [Trua_Chao], 
+    [ThucDon].[Trua_TrangMieng_NhaTre] AS [Trua_TrangMieng_NhaTre], 
+    [ThucDon].[Chieu_Chao] AS [Chieu_Chao], 
+    [ThucDon].[Chieu_TrangMieng_NhaTre] AS [Chieu_TrangMieng_NhaTre], 
+    [ThucDon].[TenThucDon] AS [TenThucDon]
+    FROM [dbo].[ThucDon] AS [ThucDon]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__ThucDonNg__ThucD__403A8C7D" Association="Self.FK__ThucDonNg__ThucD__403A8C7D">
+            <End Role="ThucDonTuan" EntitySet="ThucDonTuan" />
+            <End Role="ThucDonNgay" EntitySet="ThucDonNgay" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_Chao" Association="Self.FK_Chieu_Chao">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_MonChinh" Association="Self.FK_Chieu_MonChinh">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_TrangMieng" Association="Self.FK_Chieu_TrangMieng">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_TrangMieng_NhaTre" Association="Self.FK_Chieu_TrangMieng_NhaTre">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sang_Chao" Association="Self.FK_Sang_Chao">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sang_MonChinh" Association="Self.FK_Sang_MonChinh">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sang_TrangMieng" Association="Self.FK_Sang_TrangMieng">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_Chao" Association="Self.FK_Trua_Chao">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_MonCanh" Association="Self.FK_Trua_MonCanh">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_MonMan" Association="Self.FK_Trua_MonMan">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_MonRauCu" Association="Self.FK_Trua_MonRauCu">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_TrangMieng" Association="Self.FK_Trua_TrangMieng">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_TrangMieng_NhaTre" Association="Self.FK_Trua_TrangMieng_NhaTre">
+            <End Role="MonAn" EntitySet="MonAn" />
+            <End Role="ThucDon" EntitySet="ThucDon" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ThucDonDinhDuongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MonAn">
+          <Key>
+            <PropertyRef Name="TenMon" />
+          </Key>
+          <Property Name="MaMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenMon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoaiMon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ThucDons" Relationship="Self.FK_Chieu_Chao" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons1" Relationship="Self.FK_Chieu_MonChinh" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons2" Relationship="Self.FK_Chieu_TrangMieng" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons3" Relationship="Self.FK_Chieu_TrangMieng_NhaTre" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons4" Relationship="Self.FK_Sang_Chao" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons5" Relationship="Self.FK_Sang_MonChinh" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons6" Relationship="Self.FK_Sang_TrangMieng" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons7" Relationship="Self.FK_Trua_Chao" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons8" Relationship="Self.FK_Trua_MonCanh" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons9" Relationship="Self.FK_Trua_MonMan" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons10" Relationship="Self.FK_Trua_MonRauCu" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons11" Relationship="Self.FK_Trua_TrangMieng" FromRole="MonAn" ToRole="ThucDon" />
+          <NavigationProperty Name="ThucDons12" Relationship="Self.FK_Trua_TrangMieng_NhaTre" FromRole="MonAn" ToRole="ThucDon" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ThucDonNgay">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ThucDonTuanID" Type="Int32" />
+          <Property Name="Thu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="MonChinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MonMan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MonCanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MonXao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TrangMieng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ThucDonTuan" Relationship="Self.FK__ThucDonNg__ThucD__403A8C7D" FromRole="ThucDonNgay" ToRole="ThucDonTuan" />
+        </EntityType>
+        <EntityType Name="ThucDonTuan">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KhuVuc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TenThucDon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ThucDonNgays" Relationship="Self.FK__ThucDonNg__ThucD__403A8C7D" FromRole="ThucDonTuan" ToRole="ThucDonNgay" />
+        </EntityType>
+        <EntityType Name="ThucDon">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="NhomTre" />
+            <PropertyRef Name="Thu" />
+            <PropertyRef Name="TenThucDon" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NhomTre" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Thu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Sang_MonChinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sang_TrangMieng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Trua_MonMan" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Trua_MonCanh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Trua_MonRauCu" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Trua_TrangMieng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Chieu_MonChinh" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Chieu_TrangMieng" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sang_Chao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Trua_Chao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Trua_TrangMieng_NhaTre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Chieu_Chao" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Chieu_TrangMieng_NhaTre" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TenThucDon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="MonAn" Relationship="Self.FK_Chieu_Chao" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn1" Relationship="Self.FK_Chieu_MonChinh" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn2" Relationship="Self.FK_Chieu_TrangMieng" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn3" Relationship="Self.FK_Chieu_TrangMieng_NhaTre" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn4" Relationship="Self.FK_Sang_Chao" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn5" Relationship="Self.FK_Sang_MonChinh" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn6" Relationship="Self.FK_Sang_TrangMieng" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn7" Relationship="Self.FK_Trua_Chao" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn8" Relationship="Self.FK_Trua_MonCanh" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn9" Relationship="Self.FK_Trua_MonMan" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn10" Relationship="Self.FK_Trua_MonRauCu" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn11" Relationship="Self.FK_Trua_TrangMieng" FromRole="ThucDon" ToRole="MonAn" />
+          <NavigationProperty Name="MonAn12" Relationship="Self.FK_Trua_TrangMieng_NhaTre" FromRole="ThucDon" ToRole="MonAn" />
+        </EntityType>
+        <Association Name="FK_Chieu_Chao">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_Chao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_MonChinh">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_MonChinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_TrangMieng">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_TrangMieng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Chieu_TrangMieng_NhaTre">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Chieu_TrangMieng_NhaTre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sang_Chao">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Sang_Chao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sang_MonChinh">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Sang_MonChinh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sang_TrangMieng">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Sang_TrangMieng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_Chao">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_Chao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_MonCanh">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_MonCanh" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_MonMan">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_MonMan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_MonRauCu">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_MonRauCu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_TrangMieng">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_TrangMieng" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Trua_TrangMieng_NhaTre">
+          <End Role="MonAn" Type="Self.MonAn" Multiplicity="0..1" />
+          <End Role="ThucDon" Type="Self.ThucDon" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MonAn">
+              <PropertyRef Name="TenMon" />
+            </Principal>
+            <Dependent Role="ThucDon">
+              <PropertyRef Name="Trua_TrangMieng_NhaTre" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThucDonNg__ThucD__403A8C7D">
+          <End Role="ThucDonTuan" Type="Self.ThucDonTuan" Multiplicity="0..1" />
+          <End Role="ThucDonNgay" Type="Self.ThucDonNgay" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThucDonTuan">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ThucDonNgay">
+              <PropertyRef Name="ThucDonTuanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Thực_đơn_dinh_dưỡngEntities3" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MonAns" EntityType="Self.MonAn" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="ThucDonNgays" EntityType="Self.ThucDonNgay" />
+          <EntitySet Name="ThucDonTuans" EntityType="Self.ThucDonTuan" />
+          <EntitySet Name="ThucDons" EntityType="Self.ThucDon" />
+          <AssociationSet Name="FK_Chieu_Chao" Association="Self.FK_Chieu_Chao">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_MonChinh" Association="Self.FK_Chieu_MonChinh">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_TrangMieng" Association="Self.FK_Chieu_TrangMieng">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Chieu_TrangMieng_NhaTre" Association="Self.FK_Chieu_TrangMieng_NhaTre">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sang_Chao" Association="Self.FK_Sang_Chao">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sang_MonChinh" Association="Self.FK_Sang_MonChinh">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sang_TrangMieng" Association="Self.FK_Sang_TrangMieng">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_Chao" Association="Self.FK_Trua_Chao">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_MonCanh" Association="Self.FK_Trua_MonCanh">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_MonMan" Association="Self.FK_Trua_MonMan">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_MonRauCu" Association="Self.FK_Trua_MonRauCu">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_TrangMieng" Association="Self.FK_Trua_TrangMieng">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Trua_TrangMieng_NhaTre" Association="Self.FK_Trua_TrangMieng_NhaTre">
+            <End Role="MonAn" EntitySet="MonAns" />
+            <End Role="ThucDon" EntitySet="ThucDons" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThucDonNg__ThucD__403A8C7D" Association="Self.FK__ThucDonNg__ThucD__403A8C7D">
+            <End Role="ThucDonTuan" EntitySet="ThucDonTuans" />
+            <End Role="ThucDonNgay" EntitySet="ThucDonNgays" />
+          </AssociationSet>
+          <FunctionImport Name="chon_MonAn" ReturnType="Collection(ThucDonDinhDuongModel.chon_MonAn_Result)" />
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(ThucDonDinhDuongModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(ThucDonDinhDuongModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+          <FunctionImport Name="sua_MonAn">
+            <Parameter Name="MaMon" Mode="In" Type="Int32" />
+            <Parameter Name="TenMon" Mode="In" Type="String" />
+            <Parameter Name="LoaiMon" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="them_MonAn">
+            <Parameter Name="TenMon" Mode="In" Type="String" />
+            <Parameter Name="LoaiMon" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="xoa_MonAn">
+            <Parameter Name="MaMon" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="chon_MonAn_Result">
+          <Property Type="Int32" Name="MaMon" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LoaiMon" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ThucDonDinhDuongModelStoreContainer" CdmEntityContainer="Thực_đơn_dinh_dưỡngEntities3">
+          <EntitySetMapping Name="MonAns">
+            <EntityTypeMapping TypeName="ThucDonDinhDuongModel.MonAn">
+              <MappingFragment StoreEntitySet="MonAn">
+                <ScalarProperty Name="MaMon" ColumnName="MaMon" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="LoaiMon" ColumnName="LoaiMon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="ThucDonDinhDuongModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThucDonNgays">
+            <EntityTypeMapping TypeName="ThucDonDinhDuongModel.ThucDonNgay">
+              <MappingFragment StoreEntitySet="ThucDonNgay">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="ThucDonTuanID" ColumnName="ThucDonTuanID" />
+                <ScalarProperty Name="Thu" ColumnName="Thu" />
+                <ScalarProperty Name="MonChinh" ColumnName="MonChinh" />
+                <ScalarProperty Name="MonMan" ColumnName="MonMan" />
+                <ScalarProperty Name="MonCanh" ColumnName="MonCanh" />
+                <ScalarProperty Name="MonXao" ColumnName="MonXao" />
+                <ScalarProperty Name="TrangMieng" ColumnName="TrangMieng" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThucDonTuans">
+            <EntityTypeMapping TypeName="ThucDonDinhDuongModel.ThucDonTuan">
+              <MappingFragment StoreEntitySet="ThucDonTuan">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="KhuVuc" ColumnName="KhuVuc" />
+                <ScalarProperty Name="TenThucDon" ColumnName="TenThucDon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThucDons">
+            <EntityTypeMapping TypeName="ThucDonDinhDuongModel.ThucDon">
+              <MappingFragment StoreEntitySet="ThucDon">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NhomTre" ColumnName="NhomTre" />
+                <ScalarProperty Name="Thu" ColumnName="Thu" />
+                <ScalarProperty Name="Sang_MonChinh" ColumnName="Sang_MonChinh" />
+                <ScalarProperty Name="Sang_TrangMieng" ColumnName="Sang_TrangMieng" />
+                <ScalarProperty Name="Trua_MonMan" ColumnName="Trua_MonMan" />
+                <ScalarProperty Name="Trua_MonCanh" ColumnName="Trua_MonCanh" />
+                <ScalarProperty Name="Trua_MonRauCu" ColumnName="Trua_MonRauCu" />
+                <ScalarProperty Name="Trua_TrangMieng" ColumnName="Trua_TrangMieng" />
+                <ScalarProperty Name="Chieu_MonChinh" ColumnName="Chieu_MonChinh" />
+                <ScalarProperty Name="Chieu_TrangMieng" ColumnName="Chieu_TrangMieng" />
+                <ScalarProperty Name="Sang_Chao" ColumnName="Sang_Chao" />
+                <ScalarProperty Name="Trua_Chao" ColumnName="Trua_Chao" />
+                <ScalarProperty Name="Trua_TrangMieng_NhaTre" ColumnName="Trua_TrangMieng_NhaTre" />
+                <ScalarProperty Name="Chieu_Chao" ColumnName="Chieu_Chao" />
+                <ScalarProperty Name="Chieu_TrangMieng_NhaTre" ColumnName="Chieu_TrangMieng_NhaTre" />
+                <ScalarProperty Name="TenThucDon" ColumnName="TenThucDon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="chon_MonAn" FunctionName="ThucDonDinhDuongModel.Store.chon_MonAn">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ThucDonDinhDuongModel.chon_MonAn_Result">
+                <ScalarProperty Name="MaMon" ColumnName="MaMon" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="LoaiMon" ColumnName="LoaiMon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="ThucDonDinhDuongModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="ThucDonDinhDuongModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="ThucDonDinhDuongModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="ThucDonDinhDuongModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ThucDonDinhDuongModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="ThucDonDinhDuongModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ThucDonDinhDuongModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="ThucDonDinhDuongModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="ThucDonDinhDuongModel.Store.sp_upgraddiagrams" />
+          <FunctionImportMapping FunctionImportName="sua_MonAn" FunctionName="ThucDonDinhDuongModel.Store.sua_MonAn" />
+          <FunctionImportMapping FunctionImportName="them_MonAn" FunctionName="ThucDonDinhDuongModel.Store.them_MonAn" />
+          <FunctionImportMapping FunctionImportName="xoa_MonAn" FunctionName="ThucDonDinhDuongModel.Store.xoa_MonAn" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
