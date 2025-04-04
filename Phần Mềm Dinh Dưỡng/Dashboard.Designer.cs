@@ -40,10 +40,10 @@
             this.guna2AnimateWindow1 = new Guna.UI2.WinForms.Guna2AnimateWindow(this.components);
             this.guna2Elipse1 = new Guna.UI2.WinForms.Guna2Elipse(this.components);
             this.panel2 = new System.Windows.Forms.Panel();
+            this.uC_TaoThucDonTuMonAn1 = new Phần_Mềm_Dinh_Dưỡng.user_control.UC_TaoThucDonTuMonAn();
+            this.uC_TaoThucDonTheoMau1 = new Phần_Mềm_Dinh_Dưỡng.All_User_Control.UC_TaoThucDonTheoMau();
             this.PanelMinisize = new Guna.UI2.WinForms.Guna2Button();
             this.btnExit = new Guna.UI2.WinForms.Guna2Button();
-            this.uC_TaoThucDonTheoMau1 = new Phần_Mềm_Dinh_Dưỡng.All_User_Control.UC_TaoThucDonTheoMau();
-            this.uC_TaoThucDonTuMonAn1 = new Phần_Mềm_Dinh_Dưỡng.user_control.UC_TaoThucDonTuMonAn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -92,7 +92,7 @@
             this.btnAddFromNganHangThucDon.Name = "btnAddFromNganHangThucDon";
             this.btnAddFromNganHangThucDon.Size = new System.Drawing.Size(315, 50);
             this.btnAddFromNganHangThucDon.TabIndex = 1;
-            this.btnAddFromNganHangThucDon.Text = "TẠO THỰC ĐƠN TỪ NGÂN HÀNG THỰC ĐƠN";
+            this.btnAddFromNganHangThucDon.Text = "XEM THỰC ĐƠN";
             this.btnAddFromNganHangThucDon.Click += new System.EventHandler(this.btnAddFromNganHangThucDon_Click);
             // 
             // AddFromNguyenLieu
@@ -180,6 +180,20 @@
             this.panel2.TabIndex = 3;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
+            // uC_TaoThucDonTuMonAn1
+            // 
+            this.uC_TaoThucDonTuMonAn1.Location = new System.Drawing.Point(-2, -2);
+            this.uC_TaoThucDonTuMonAn1.Name = "uC_TaoThucDonTuMonAn1";
+            this.uC_TaoThucDonTuMonAn1.Size = new System.Drawing.Size(1882, 852);
+            this.uC_TaoThucDonTuMonAn1.TabIndex = 2;
+            // 
+            // uC_TaoThucDonTheoMau1
+            // 
+            this.uC_TaoThucDonTheoMau1.Location = new System.Drawing.Point(-22, -30);
+            this.uC_TaoThucDonTheoMau1.Name = "uC_TaoThucDonTheoMau1";
+            this.uC_TaoThucDonTheoMau1.Size = new System.Drawing.Size(1923, 908);
+            this.uC_TaoThucDonTheoMau1.TabIndex = 1;
+            // 
             // PanelMinisize
             // 
             this.PanelMinisize.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
@@ -212,20 +226,6 @@
             this.btnExit.Size = new System.Drawing.Size(37, 36);
             this.btnExit.TabIndex = 0;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // uC_TaoThucDonTheoMau1
-            // 
-            this.uC_TaoThucDonTheoMau1.Location = new System.Drawing.Point(-22, -30);
-            this.uC_TaoThucDonTheoMau1.Name = "uC_TaoThucDonTheoMau1";
-            this.uC_TaoThucDonTheoMau1.Size = new System.Drawing.Size(1923, 908);
-            this.uC_TaoThucDonTheoMau1.TabIndex = 1;
-            // 
-            // uC_TaoThucDonTuMonAn1
-            // 
-            this.uC_TaoThucDonTuMonAn1.Location = new System.Drawing.Point(-2, -2);
-            this.uC_TaoThucDonTuMonAn1.Name = "uC_TaoThucDonTuMonAn1";
-            this.uC_TaoThucDonTuMonAn1.Size = new System.Drawing.Size(1882, 852);
-            this.uC_TaoThucDonTuMonAn1.TabIndex = 2;
             // 
             // Dashboard
             // 

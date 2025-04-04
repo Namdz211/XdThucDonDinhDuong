@@ -172,7 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="chon_MonAn_Result.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
+      <DependentUpon>MonAnModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Dashboard.cs">
       <SubType>Form</SubType>
@@ -199,43 +199,25 @@
       <DependentUpon>Login Screen.cs</DependentUpon>
     </Compile>
     <Compile Include="MonAn.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
+      <DependentUpon>MonAnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonAnModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonAnModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonAnModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonAnModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MonAnModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MonAnModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="sp_helpdiagramdefinition_Result.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sp_helpdiagrams_Result.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="sysdiagram.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ThucDon.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ThucDonDinhDuongModel1.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ThucDonDinhDuongModel1.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ThucDonDinhDuongModel1.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ThucDonDinhDuongModel1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ThucDonDinhDuongModel1.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="ThucDonNgay.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ThucDonTuan.cs">
-      <DependentUpon>ThucDonDinhDuongModel1.tt</DependentUpon>
-    </Compile>
     <Compile Include="user control\UC_TaoThucDonTheoMau.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -276,6 +258,13 @@
     <EmbeddedResource Include="user control\UC_TaoThucDonTuMonAn.resx">
       <DependentUpon>UC_TaoThucDonTuMonAn.cs</DependentUpon>
     </EmbeddedResource>
+    <EntityDeploy Include="MonAnModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MonAnModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="MonAnModel.edmx.diagram">
+      <DependentUpon>MonAnModel.edmx</DependentUpon>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -286,13 +275,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EntityDeploy Include="ThucDonDinhDuongModel1.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ThucDonDinhDuongModel1.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="ThucDonDinhDuongModel1.edmx.diagram">
-      <DependentUpon>ThucDonDinhDuongModel1.edmx</DependentUpon>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -322,15 +304,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ThucDonDinhDuongModel1.Context.tt">
+    <Content Include="MonAnModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ThucDonDinhDuongModel1.edmx</DependentUpon>
-      <LastGenOutput>ThucDonDinhDuongModel1.Context.cs</LastGenOutput>
+      <DependentUpon>MonAnModel.edmx</DependentUpon>
+      <LastGenOutput>MonAnModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ThucDonDinhDuongModel1.tt">
+    <Content Include="MonAnModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ThucDonDinhDuongModel1.edmx</DependentUpon>
-      <LastGenOutput>ThucDonDinhDuongModel1.cs</LastGenOutput>
+      <DependentUpon>MonAnModel.edmx</DependentUpon>
+      <LastGenOutput>MonAnModel.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

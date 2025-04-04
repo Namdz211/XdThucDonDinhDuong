@@ -27,6 +27,12 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
         }
         private void UC_TaoThucDonTuMonAn_Load(object sender, EventArgs e)
         {
+            // Kiểm tra tên cột trong DataGridView
+            foreach (DataGridViewColumn column in dgvThucDonMonAn.Columns)
+            {
+                Console.WriteLine(column.Name);
+            }
+
             // Thêm lựa chọn nhóm trẻ
             cboNhomTre.Items.Add("Nhóm mẫu giáo");
             cboNhomTre.Items.Add("Nhóm nhà trẻ");
@@ -77,11 +83,11 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
                 dgvThucDonMonAn.Columns.Add(CreateComboBoxColumn("Trua_TrangMieng_NhaTre", "Bữa trưa - Tráng miệng", "Tráng miệng"));
 
                 dgvThucDonMonAn.Columns.Add(CreateComboBoxColumn("Chieu_Chao", "Bữa chiều - Cháo", "Cháo"));
-                dgvThucDonMonAn.Columns.Add(CreateComboBoxColumn("Chieu_SuaChua", "Bữa chiều - Sữa chua", "Sữa chua"));
+                dgvThucDonMonAn.Columns.Add(CreateComboBoxColumn("Chieu_TrangMieng_NhaTre", "Bữa chiều - Sữa chua", "Sữa chua"));
             }
 
             // 🔹 Thêm dòng dữ liệu (thứ 2 -> thứ 7)
-            string[] thuList = { "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7" };
+            string[] thuList = { "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6" };
             foreach (string thu in thuList)
             {
                 dgvThucDonMonAn.Rows.Add(thu);
@@ -124,6 +130,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
 
             {
                 conn.Open();
+               
                 foreach (DataGridViewRow row in dgvThucDonMonAn.Rows)
                 {
                     if (row.IsNewRow) continue;
@@ -133,12 +140,12 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
                                      Sang_MonChinh, Sang_TrangMieng, 
                                      Trua_MonMan, Trua_MonCanh, Trua_MonRauCu, Trua_TrangMieng, 
                                      Chieu_MonChinh, Chieu_TrangMieng, 
-                                     Sang_Chao, Trua_Chao, Trua_TrangMieng_NhaTre, Chieu_Chao, Chieu_SuaChua)
+                                     Sang_Chao, Trua_Chao, Trua_TrangMieng_NhaTre, Chieu_Chao, Chieu_TrangMieng_NhaTre)
                 VALUES (@NhomTre, @Thu, 
                         @Sang_MonChinh, @Sang_TrangMieng, 
                         @Trua_MonMan, @Trua_MonCanh, @Trua_MonRauCu, @Trua_TrangMieng, 
                         @Chieu_MonChinh, @Chieu_TrangMieng, 
-                        @Sang_Chao, @Trua_Chao, @Trua_TrangMieng_NhaTre, @Chieu_Chao, @Chieu_SuaChua)";
+                        @Sang_Chao, @Trua_Chao, @Trua_TrangMieng_NhaTre, @Chieu_Chao, @Chieu_TrangMieng_NhaTre)";
 
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -156,11 +163,19 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
                         cmd.Parameters.AddWithValue("@Chieu_TrangMieng", row.Cells["Chieu_TrangMieng"].Value ?? DBNull.Value);
 
                         // Nhà trẻ
+                        if (cboNhomTre.SelectedItem.ToString() == "Nhóm nhà trẻ")
+                        {
+                            cmd.Parameters.AddWithValue("@Sang_Chao", row.Cells["Sang_Chao"].Value ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Trua_Chao", row.Cells["Trua_Chao"].Value ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Trua_TrangMieng_NhaTre", row.Cells["Trua_TrangMieng_NhaTre"].Value ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Chieu_Chao", row.Cells["Chieu_Chao"].Value ?? DBNull.Value);
+                            cmd.Parameters.AddWithValue("@Chieu_TrangMieng_NhaTre", row.Cells["Chieu_TrangMieng_NhaTre"].Value ?? DBNull.Value);
+                        }
                         cmd.Parameters.AddWithValue("@Sang_Chao", row.Cells["Sang_Chao"].Value ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@Trua_Chao", row.Cells["Trua_Chao"].Value ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@Trua_TrangMieng_NhaTre", row.Cells["Trua_TrangMieng_NhaTre"].Value ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@Chieu_Chao", row.Cells["Chieu_Chao"].Value ?? DBNull.Value);
-                        cmd.Parameters.AddWithValue("@Chieu_SuaChua", row.Cells["Chieu_SuaChua"].Value ?? DBNull.Value);
+                        cmd.Parameters.AddWithValue("@Chieu_TrangMieng_NhaTre", row.Cells["Chieu_TrangMieng_NhaTre"].Value ?? DBNull.Value);
 
                         cmd.ExecuteNonQuery();
                     }

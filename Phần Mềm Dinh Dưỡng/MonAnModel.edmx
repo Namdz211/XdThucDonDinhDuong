@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ModelMonAn.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="MonAn">
+          <Key>
+            <PropertyRef Name="MaMon" />
+          </Key>
+          <Property Name="MaMon" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TenMon" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="LoaiMon" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="chon_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sua_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaMon" Type="int" Mode="In" />
+          <Parameter Name="TenMon" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoaiMon" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="them_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="TenMon" Type="nvarchar" Mode="In" />
+          <Parameter Name="LoaiMon" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="xoa_MonAn" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MaMon" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="ModelMonAnStoreContainer">
+          <EntitySet Name="MonAn" EntityType="Self.MonAn" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ModelMonAn" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="MonAn">
+          <Key>
+            <PropertyRef Name="MaMon" />
+          </Key>
+          <Property Name="MaMon" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TenMon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LoaiMon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="MonAnEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="MonAn" EntityType="Self.MonAn" />
+          <FunctionImport Name="chon_MonAn" ReturnType="Collection(ModelMonAn.chon_MonAn_Result)" />
+          <FunctionImport Name="sua_MonAn">
+            <Parameter Name="MaMon" Mode="In" Type="Int32" />
+            <Parameter Name="TenMon" Mode="In" Type="String" />
+            <Parameter Name="LoaiMon" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="them_MonAn">
+            <Parameter Name="TenMon" Mode="In" Type="String" />
+            <Parameter Name="LoaiMon" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="xoa_MonAn">
+            <Parameter Name="MaMon" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="chon_MonAn_Result">
+          <Property Type="Int32" Name="MaMon" Nullable="false" />
+          <Property Type="String" Name="TenMon" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="LoaiMon" Nullable="true" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelMonAnStoreContainer" CdmEntityContainer="MonAnEntities">
+          <EntitySetMapping Name="MonAn">
+            <EntityTypeMapping TypeName="ModelMonAn.MonAn">
+              <MappingFragment StoreEntitySet="MonAn">
+                <ScalarProperty Name="MaMon" ColumnName="MaMon" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="LoaiMon" ColumnName="LoaiMon" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="chon_MonAn" FunctionName="ModelMonAn.Store.chon_MonAn">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ModelMonAn.chon_MonAn_Result">
+                <ScalarProperty Name="MaMon" ColumnName="MaMon" />
+                <ScalarProperty Name="TenMon" ColumnName="TenMon" />
+                <ScalarProperty Name="LoaiMon" ColumnName="LoaiMon" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sua_MonAn" FunctionName="ModelMonAn.Store.sua_MonAn" />
+          <FunctionImportMapping FunctionImportName="them_MonAn" FunctionName="ModelMonAn.Store.them_MonAn" />
+          <FunctionImportMapping FunctionImportName="xoa_MonAn" FunctionName="ModelMonAn.Store.xoa_MonAn" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

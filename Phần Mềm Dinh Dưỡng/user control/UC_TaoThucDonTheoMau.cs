@@ -113,23 +113,23 @@ namespace Phần_Mềm_Dinh_Dưỡng.All_User_Control
             }
             if (cbNhomTre.SelectedItem.ToString() == "Nhóm mẫu giáo")
             {
-                dgvThucDon.Columns["Sáng - Cháo (Nhà trẻ)"].Visible = false;
-                dgvThucDon.Columns["Trưa - Cháo (Nhà trẻ)"].Visible = false;
-                dgvThucDon.Columns["Trưa - Tráng miệng (Nhà trẻ)"].Visible = false;
-                dgvThucDon.Columns["Chiều - Cháo (Nhà trẻ)"].Visible = false;
-                dgvThucDon.Columns["Chiều - Tráng miệng (Nhà trẻ)"].Visible = false;
+                dgvThucDon.Columns[9].Visible = false;
+                dgvThucDon.Columns[10].Visible = false;
+                dgvThucDon.Columns[11].Visible = false;
+                dgvThucDon.Columns[12].Visible = false;
+                dgvThucDon.Columns[13].Visible = false;
             }
 
             if (cbNhomTre.SelectedItem.ToString() == "Nhóm nhà trẻ")
             {
-                dgvThucDon.Columns["Sáng - Món chính"].Visible = false;
-                dgvThucDon.Columns["Sáng - Tráng miệng"].Visible = false;
-                dgvThucDon.Columns["Trưa - Món mặn"].Visible = false;
-                dgvThucDon.Columns["Trưa - Món canh"].Visible = false;
-                dgvThucDon.Columns["Trưa - Rau củ"].Visible = false;
-                dgvThucDon.Columns["Trưa - Tráng miệng"].Visible = false;
-                dgvThucDon.Columns["Chiều - Món chính"].Visible = false;
-                dgvThucDon.Columns["Chiều - Tráng miệng"].Visible = false;
+                dgvThucDon.Columns[1].Visible = false;
+                dgvThucDon.Columns[2].Visible = false;
+                dgvThucDon.Columns[3].Visible = false;
+                dgvThucDon.Columns[4].Visible = false;
+                dgvThucDon.Columns[5].Visible = false;
+                dgvThucDon.Columns[6].Visible = false;
+                dgvThucDon.Columns[7].Visible = false;
+                dgvThucDon.Columns[8].Visible = false;
             }
 
         }

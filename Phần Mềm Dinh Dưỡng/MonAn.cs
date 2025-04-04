@@ -14,53 +14,8 @@ namespace Phần_Mềm_Dinh_Dưỡng
     
     public partial class MonAn
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public MonAn()
-        {
-            this.ThucDons = new HashSet<ThucDon>();
-            this.ThucDons1 = new HashSet<ThucDon>();
-            this.ThucDons2 = new HashSet<ThucDon>();
-            this.ThucDons3 = new HashSet<ThucDon>();
-            this.ThucDons4 = new HashSet<ThucDon>();
-            this.ThucDons5 = new HashSet<ThucDon>();
-            this.ThucDons6 = new HashSet<ThucDon>();
-            this.ThucDons7 = new HashSet<ThucDon>();
-            this.ThucDons8 = new HashSet<ThucDon>();
-            this.ThucDons9 = new HashSet<ThucDon>();
-            this.ThucDons10 = new HashSet<ThucDon>();
-            this.ThucDons11 = new HashSet<ThucDon>();
-            this.ThucDons12 = new HashSet<ThucDon>();
-        }
-    
         public int MaMon { get; set; }
         public string TenMon { get; set; }
         public string LoaiMon { get; set; }
-    
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons2 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons3 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons4 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons5 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons6 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons7 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons8 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons9 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons10 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons11 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThucDon> ThucDons12 { get; set; }
     }
 }
