@@ -53,6 +53,7 @@
             this.dgvDsMonAn.RowTemplate.Height = 24;
             this.dgvDsMonAn.Size = new System.Drawing.Size(768, 283);
             this.dgvDsMonAn.TabIndex = 2;
+            this.dgvDsMonAn.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvDsMonAn_CellClick_1);
             // 
             // txtLoaiMonAn
             // 

@@ -163,14 +163,6 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
                         cmd.Parameters.AddWithValue("@Chieu_TrangMieng", row.Cells["Chieu_TrangMieng"].Value ?? DBNull.Value);
 
                         // Nhà trẻ
-                        if (cboNhomTre.SelectedItem.ToString() == "Nhóm nhà trẻ")
-                        {
-                            cmd.Parameters.AddWithValue("@Sang_Chao", row.Cells["Sang_Chao"].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Trua_Chao", row.Cells["Trua_Chao"].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Trua_TrangMieng_NhaTre", row.Cells["Trua_TrangMieng_NhaTre"].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Chieu_Chao", row.Cells["Chieu_Chao"].Value ?? DBNull.Value);
-                            cmd.Parameters.AddWithValue("@Chieu_TrangMieng_NhaTre", row.Cells["Chieu_TrangMieng_NhaTre"].Value ?? DBNull.Value);
-                        }
                         cmd.Parameters.AddWithValue("@Sang_Chao", row.Cells["Sang_Chao"].Value ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@Trua_Chao", row.Cells["Trua_Chao"].Value ?? DBNull.Value);
                         cmd.Parameters.AddWithValue("@Trua_TrangMieng_NhaTre", row.Cells["Trua_TrangMieng_NhaTre"].Value ?? DBNull.Value);

@@ -90,14 +90,8 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
         }
 
 
-        
-           private void dgvDsMonAn_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex < 0 || dgvDsMonAn.CurrentRow == null) return; // Thêm dòng này
 
-            txtTenMonAn.Text = dgvDsMonAn[1, e.RowIndex].Value?.ToString();
-            txtLoaiMonAn.Text = dgvDsMonAn[2, e.RowIndex].Value?.ToString();
-        }
+      
 
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
@@ -107,6 +101,29 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
         private void label4_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void dgvDsMonAn_CellClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+                // Bỏ qua khi click vào header hoặc dòng trống
+                if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
+
+                // Lấy dòng được chọn
+                DataGridViewRow row = dgvDsMonAn.Rows[e.RowIndex];
+
+                // Debug: In ra console để kiểm tra
+                Console.WriteLine($"Selected: ID={row.Cells["MaMon"].Value}, Tên={row.Cells["TenMon"].Value}");
+
+                // Gán giá trị vào TextBox - SỬ DỤNG TÊN CỘT CHÍNH XÁC
+                txtTenMonAn.Text = row.Cells["TenMon"].Value?.ToString() ?? "";
+                txtLoaiMonAn.Text = row.Cells["LoaiMon"].Value?.ToString() ?? "";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi khi chọn dòng: " + ex.Message);
+            }
         }
     }
 
