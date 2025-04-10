@@ -45,15 +45,17 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.cboNhomTre = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.dgvComparison = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnalysis)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartNutrition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComparison)).BeginInit();
             this.SuspendLayout();
             // 
             // lblAvgFiber
             // 
             this.lblAvgFiber.AutoSize = true;
             this.lblAvgFiber.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvgFiber.Location = new System.Drawing.Point(227, 349);
+            this.lblAvgFiber.Location = new System.Drawing.Point(12, 288);
             this.lblAvgFiber.Name = "lblAvgFiber";
             this.lblAvgFiber.Size = new System.Drawing.Size(61, 25);
             this.lblAvgFiber.TabIndex = 15;
@@ -63,7 +65,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             // 
             this.lblAvgCarbs.AutoSize = true;
             this.lblAvgCarbs.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvgCarbs.Location = new System.Drawing.Point(227, 253);
+            this.lblAvgCarbs.Location = new System.Drawing.Point(12, 208);
             this.lblAvgCarbs.Name = "lblAvgCarbs";
             this.lblAvgCarbs.Size = new System.Drawing.Size(154, 25);
             this.lblAvgCarbs.TabIndex = 14;
@@ -73,7 +75,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             // 
             this.lblAvgFat.AutoSize = true;
             this.lblAvgFat.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvgFat.Location = new System.Drawing.Point(227, 297);
+            this.lblAvgFat.Location = new System.Drawing.Point(12, 248);
             this.lblAvgFat.Name = "lblAvgFat";
             this.lblAvgFat.Size = new System.Drawing.Size(43, 25);
             this.lblAvgFat.TabIndex = 13;
@@ -83,7 +85,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             // 
             this.lblAvgProtein.AutoSize = true;
             this.lblAvgProtein.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvgProtein.Location = new System.Drawing.Point(227, 197);
+            this.lblAvgProtein.Location = new System.Drawing.Point(12, 169);
             this.lblAvgProtein.Name = "lblAvgProtein";
             this.lblAvgProtein.Size = new System.Drawing.Size(80, 25);
             this.lblAvgProtein.TabIndex = 12;
@@ -94,11 +96,11 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             this.dgvAnalysis.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvAnalysis.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dgvAnalysis.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvAnalysis.Location = new System.Drawing.Point(321, 519);
+            this.dgvAnalysis.Location = new System.Drawing.Point(185, 456);
             this.dgvAnalysis.Name = "dgvAnalysis";
             this.dgvAnalysis.RowHeadersWidth = 51;
             this.dgvAnalysis.RowTemplate.Height = 24;
-            this.dgvAnalysis.Size = new System.Drawing.Size(240, 150);
+            this.dgvAnalysis.Size = new System.Drawing.Size(367, 230);
             this.dgvAnalysis.TabIndex = 11;
             this.dgvAnalysis.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvAnalysis_CellContentClick);
             // 
@@ -113,12 +115,12 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             this.txtComparison.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.txtComparison.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.txtComparison.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.txtComparison.Location = new System.Drawing.Point(339, 426);
+            this.txtComparison.Location = new System.Drawing.Point(17, 328);
             this.txtComparison.Name = "txtComparison";
             this.txtComparison.PasswordChar = '\0';
             this.txtComparison.PlaceholderText = "";
             this.txtComparison.SelectedText = "";
-            this.txtComparison.Size = new System.Drawing.Size(200, 36);
+            this.txtComparison.Size = new System.Drawing.Size(348, 78);
             this.txtComparison.TabIndex = 10;
             this.txtComparison.TextChanged += new System.EventHandler(this.txtComparison_TextChanged);
             // 
@@ -126,7 +128,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             // 
             this.lblAvgCalories.AutoSize = true;
             this.lblAvgCalories.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAvgCalories.Location = new System.Drawing.Point(227, 141);
+            this.lblAvgCalories.Location = new System.Drawing.Point(12, 130);
             this.lblAvgCalories.Name = "lblAvgCalories";
             this.lblAvgCalories.Size = new System.Drawing.Size(92, 25);
             this.lblAvgCalories.TabIndex = 9;
@@ -142,7 +144,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             legend1.Name = "Legend1";
             legend1.Title = "Chỉ số";
             this.chartNutrition.Legends.Add(legend1);
-            this.chartNutrition.Location = new System.Drawing.Point(568, 74);
+            this.chartNutrition.Location = new System.Drawing.Point(576, 58);
             this.chartNutrition.Name = "chartNutrition";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
@@ -169,7 +171,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(227, 88);
+            this.label2.Location = new System.Drawing.Point(12, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(99, 25);
             this.label2.TabIndex = 17;
@@ -185,16 +187,29 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             this.cboNhomTre.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.cboNhomTre.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.cboNhomTre.ItemHeight = 30;
-            this.cboNhomTre.Location = new System.Drawing.Point(374, 88);
+            this.cboNhomTre.Location = new System.Drawing.Point(130, 77);
             this.cboNhomTre.Name = "cboNhomTre";
-            this.cboNhomTre.Size = new System.Drawing.Size(140, 36);
+            this.cboNhomTre.Size = new System.Drawing.Size(223, 36);
             this.cboNhomTre.TabIndex = 18;
+            // 
+            // dgvComparison
+            // 
+            this.dgvComparison.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
+            this.dgvComparison.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
+            this.dgvComparison.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvComparison.Location = new System.Drawing.Point(649, 441);
+            this.dgvComparison.Name = "dgvComparison";
+            this.dgvComparison.RowHeadersWidth = 51;
+            this.dgvComparison.RowTemplate.Height = 24;
+            this.dgvComparison.Size = new System.Drawing.Size(367, 230);
+            this.dgvComparison.TabIndex = 19;
             // 
             // FormKtraDinhDuong
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1130, 698);
+            this.Controls.Add(this.dgvComparison);
             this.Controls.Add(this.cboNhomTre);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -211,6 +226,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
             this.Load += new System.EventHandler(this.FormKtraDinhDuong_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvAnalysis)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartNutrition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvComparison)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +245,6 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
         private System.Windows.Forms.Label label1;
         private Label label2;
         private Guna.UI2.WinForms.Guna2ComboBox cboNhomTre;
+        private DataGridView dgvComparison;
     }
 }

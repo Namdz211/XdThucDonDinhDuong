@@ -87,7 +87,7 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
                 dgvThucDonMonAn.Columns.Add(CreateComboBoxColumn("Chieu_TrangMieng_NhaTre", "Bữa chiều - Sữa chua", "Sữa chua"));
             }
 
-            // 🔹 Thêm dòng dữ liệu (thứ 2 -> thứ 7)
+            // 🔹 Thêm dòng dữ liệu (thứ 2 -> thứ 6)
             string[] thuList = { "Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6" };
             foreach (string thu in thuList)
             {
@@ -246,14 +246,14 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
             // Lấy tiêu chuẩn dinh dưỡng
             var standard = GetStandardNutrition(cboNhomTre.SelectedItem.ToString());
 
-            // Tạo bảng so sánh
+            // Tạo bảng so sánh với định dạng mới
             DataTable dtComparison = CreateComparisonTable(dtAnalysis, standard);
 
             // Hiển thị kết quả
             FormKtraDinhDuong resultForm = new FormKtraDinhDuong(dtAnalysis, dtComparison);
             resultForm.Show();
         }
-      
+
 
         private DinhDuong GetDinhDuong(string maMon)
         {
@@ -284,36 +284,44 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("Ngày");
-            dt.Columns.Add("Calories");
-            dt.Columns.Add("Protein");
-            dt.Columns.Add("Carbs");
-            dt.Columns.Add("Fat");
-            dt.Columns.Add("Fiber");
-            dt.Columns.Add("Đánh giá");
+            dt.Columns.Add("Calories", typeof(string));
+            dt.Columns.Add("Protein", typeof(string));
+            dt.Columns.Add("Carbs", typeof(string));
+            dt.Columns.Add("Fat", typeof(string));
+            dt.Columns.Add("Fiber", typeof(string));
+            dt.Columns.Add("Đánh giá", typeof(string));
 
             foreach (DataRow row in analysisData.Rows)
             {
-                var dailyNutrition = new NutritionInfo
+                double dayCalories = Convert.ToDouble(row["Calories"]);
+                double dayProtein = Convert.ToDouble(row["Protein (g)"]);
+                double dayCarbs = Convert.ToDouble(row["Carbs (g)"]);
+                double dayFat = Convert.ToDouble(row["Fat (g)"]);
+                double dayFiber = Convert.ToDouble(row["Fiber (g)"]);
+
+                // Tính phần trăm so với tiêu chuẩn
+                string caloriesText = $"{dayCalories:F0} kcal ({(dayCalories / standard.Calories * 100):F0}%)";
+                string proteinText = $"{dayProtein:F0}g ({(dayProtein / standard.Protein * 100):F0}%)";
+                string carbsText = $"{dayCarbs:F0}g ({(dayCarbs / standard.Carbs * 100):F0}%)";
+                string fatText = $"{dayFat:F0}g ({(dayFat / standard.Fat * 100):F0}%)";
+                string fiberText = $"{dayFiber:F0}g ({(dayFiber / standard.Fiber * 100):F0}%)";
+
+                // Đánh giá tổng thể
+                string danhGia = "Đạt";
+                if (dayCalories < standard.Calories * 0.9 ||
+                    dayProtein < standard.Protein * 0.9 ||
+                    dayFiber < standard.Fiber * 0.9)
                 {
-                    Calories = Convert.ToDouble(row["Calories"]),
-                    Protein = Convert.ToDouble(row["Protein (g)"]),
-                    Carbs = Convert.ToDouble(row["Carbs (g)"]),
-                    Fat = Convert.ToDouble(row["Fat (g)"]),
-                    Fiber = Convert.ToDouble(row["Fiber (g)"])
-                };
-
-                var comparison = dailyNutrition.CompareWithStandard(standard);
-
-                // Đánh giá chung
-                string danhGia = (dailyNutrition.Calories >= standard.Calories * 0.9) ? "Đạt" : "Thiếu";
+                    danhGia = "Thiếu";
+                }
 
                 dt.Rows.Add(
                     row["Ngày"],
-                    comparison["Calories"],
-                    comparison["Protein"],
-                    comparison["Carbs"],
-                    comparison["Fat"],
-                    comparison["Fiber"],
+                    caloriesText,
+                    proteinText,
+                    carbsText,
+                    fatText,
+                    fiberText,
                     danhGia
                 );
             }

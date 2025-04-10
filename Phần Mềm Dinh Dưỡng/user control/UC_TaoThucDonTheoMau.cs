@@ -36,6 +36,16 @@ namespace Phần_Mềm_Dinh_Dưỡng.All_User_Control
             cbTenThucDon.DisplayMember = "TenThucDon";
             cbTenThucDon.ValueMember = "TenThucDon";
         }
+        private void HideColumnsIfExist(params string[] columnNames)
+        {
+            foreach (string colName in columnNames)
+            {
+                if (dgvThucDon.Columns.Contains(colName))
+                {
+                    dgvThucDon.Columns[colName].Visible = false;
+                }
+            }
+        }
 
         // Load thực đơn theo nhóm trẻ và tên thực đơn
         void LoadThucDon(string nhomTre, string tenThucDon)
@@ -71,7 +81,60 @@ namespace Phần_Mềm_Dinh_Dưỡng.All_User_Control
             dgvThucDon.Columns["Trua_TrangMieng_NhaTre"].HeaderText = "Trưa - Tráng miệng (Nhà trẻ)";
             dgvThucDon.Columns["Chieu_Chao"].HeaderText = "Chiều - Cháo (Nhà trẻ)";
             dgvThucDon.Columns["Chieu_TrangMieng_NhaTre"].HeaderText = "Chiều - Tráng miệng (Nhà trẻ)";
-        }
+            if (nhomTre == "Nhóm mẫu giáo")
+            {
+                // Ẩn các cột dành cho nhóm Nhà trẻ
+                HideColumnsIfExist(
+                    "Sang_Chao",
+                    "Trua_Chao",
+                    "Trua_TrangMieng_NhaTre",
+                    "Chieu_Chao",
+                    "Chieu_TrangMieng_NhaTre"
+                );
+            }
+            else if (nhomTre == "Nhóm nhà trẻ")
+            {
+                // Ẩn các cột dành cho nhóm Mẫu giáo
+                HideColumnsIfExist(
+                    "Sang_MonChinh",
+                    "Sang_TrangMieng",
+                    "Trua_MonMan",
+                    "Trua_MonCanh",
+                    "Trua_MonRauCu",
+                    "Trua_TrangMieng",
+                    "Chieu_MonChinh",
+                    "Chieu_TrangMieng"
+                );
+            }
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT * FROM ThucDon WHERE NhomTre = @NhomTre";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@NhomTre", cboNhomTre.SelectedItem.ToString());
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                dgvThucDonMonAn.Rows.Clear();
+                while (reader.Read())
+                {
+                    int rowIndex = dgvThucDonMonAn.Rows.Add();
+                    DataGridViewRow row = dgvThucDonMonAn.Rows[rowIndex];
+
+                    row.Cells["Thu"].Value = reader["Thu"].ToString();
+
+                    // Gán MaMon cho các ô ComboBox để nó hiển thị TenMon
+                    foreach (DataGridViewColumn col in dgvThucDonMonAn.Columns)
+                    {
+                        if (col is DataGridViewComboBoxColumn && reader[col.Name] != DBNull.Value)
+                        {
+                            row.Cells[col.Name].Value = reader[col.Name].ToString();
+                        }
+                    }
+                }
+            }
+       
+
 
         // Hàm lấy dữ liệu từ SQL Server
         private DataTable GetData(string query, params SqlParameter[] parameters)
@@ -110,28 +173,10 @@ namespace Phần_Mềm_Dinh_Dưỡng.All_User_Control
                 string nhomTre = cbNhomTre.SelectedValue.ToString();
                 string tenThucDon = cbTenThucDon.SelectedValue.ToString();
                 LoadThucDon(nhomTre, tenThucDon);
-            }
-            if (cbNhomTre.SelectedItem.ToString() == "Nhóm mẫu giáo")
-            {
-                dgvThucDon.Columns[9].Visible = false;
-                dgvThucDon.Columns[10].Visible = false;
-                dgvThucDon.Columns[11].Visible = false;
-                dgvThucDon.Columns[12].Visible = false;
-                dgvThucDon.Columns[13].Visible = false;
-            }
 
-            if (cbNhomTre.SelectedItem.ToString() == "Nhóm nhà trẻ")
-            {
-                dgvThucDon.Columns[1].Visible = false;
-                dgvThucDon.Columns[2].Visible = false;
-                dgvThucDon.Columns[3].Visible = false;
-                dgvThucDon.Columns[4].Visible = false;
-                dgvThucDon.Columns[5].Visible = false;
-                dgvThucDon.Columns[6].Visible = false;
-                dgvThucDon.Columns[7].Visible = false;
-                dgvThucDon.Columns[8].Visible = false;
+                
             }
-
         }
+
     }
 }

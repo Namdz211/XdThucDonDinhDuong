@@ -27,17 +27,24 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
         public FormKtraDinhDuong(DataTable analysisData, DataTable comparisonData)
         {
             InitializeComponent();
+            // Gán dữ liệu mẫu cho ComboBox (nếu chưa có)
+            cboNhomTre.Items.Add("Nhóm mẫu giáo");
+            cboNhomTre.Items.Add("Nhóm nhà trẻ");
+            cboNhomTre.SelectedIndex = 0; // Gán mặc định để tránh null
 
             // Hiển thị dữ liệu phân tích
             dgvAnalysis.DataSource = analysisData;
 
             // Hiển thị dữ liệu so sánh
-            dgvAnalysis.DataSource = comparisonData;
+            dgvComparison.DataSource = comparisonData;
 
-            // Tính toán và hiển thị tổng quan
+            // Gọi phương thức với 2 tham số
             DisplaySummary(analysisData, comparisonData);
+            SetupNutritionChart(analysisData, cboNhomTre.SelectedItem.ToString());
+
+
         }
-           private void DisplaySummary(DataTable analysisData)
+           private void DisplaySummary(DataTable analysisData, DataTable comparisonData)
         {
             // 1. Tính trung bình các chỉ số
             double avgCalories = analysisData.AsEnumerable().Average(r => Convert.ToDouble(r["Calories"]));
@@ -75,40 +82,60 @@ namespace Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung
         {
                 
         }
-        private void SetupNutritionChart()
+        private void SetupNutritionChart(DataTable analysisData, string nhomTre)
         {
-            // 1. Thiết lập biểu đồ
             chartNutrition.Series.Clear();
-            Series series = new Series("Dinh dưỡng");
-            series.ChartType = SeriesChartType.Column;
+            chartNutrition.ChartAreas.Clear();
+            chartNutrition.Titles.Clear();
+            chartNutrition.Legends.Clear(); // ✅ Xóa các legend cũ
 
-            // Thêm dữ liệu (ví dụ)
-            series.Points.AddXY("Calories", 100);
-            series.Points.AddXY("Protein", 80);
-            series.Points.AddXY("Carbs", 60);
-            series.Points.AddXY("Fat", 40);
-            series.Points.AddXY("Fiber", 20);
+            // ✅ Thêm legend mặc định
+            chartNutrition.Legends.Add(new Legend("Default"));
 
-            chartNutrition.Series.Add(series);
+            // Tạo ChartArea
+            ChartArea area = new ChartArea("MainArea");
+            chartNutrition.ChartAreas.Add(area);
 
-            // 2. Thiết lập các thành phần hiển thị
-            chartNutrition.Titles.Add("PHÂN TÍCH DINH DƯỠNG");
-            chartNutrition.ChartAreas[0].AxisX.Title = "Chỉ số";
-            chartNutrition.ChartAreas[0].AxisY.Title = "Giá trị";
+            // Lấy giá trị trung bình từ dữ liệu thực tế
+            double avgCalories = analysisData.AsEnumerable().Average(r => Convert.ToDouble(r["Calories"]));
+            double avgProtein = analysisData.AsEnumerable().Average(r => Convert.ToDouble(r["Protein (g)"]));
+            double avgCarbs = analysisData.AsEnumerable().Average(r => Convert.ToDouble(r["Carbs (g)"]));
+            double avgFat = analysisData.AsEnumerable().Average(r => Convert.ToDouble(r["Fat (g)"]));
+            double avgFiber = analysisData.AsEnumerable().Average(r => Convert.ToDouble(r["Fiber (g)"]));
 
-            // 3. Thêm bảng số liệu
-            DataTable dt = new DataTable();
-            dt.Columns.Add("Chỉ số");
-            dt.Columns.Add("Giá trị");
-            dt.Columns.Add("Đơn vị");
+            // Lấy tiêu chuẩn
+            var standard = GetStandardNutrition(nhomTre);
 
-            dt.Rows.Add("Calories", 100, "kcal");
-            dt.Rows.Add("Protein", 80, "g");
-            dt.Rows.Add("Carbs", 60, "g");
-            dt.Rows.Add("Fat", 40, "g");
-            dt.Rows.Add("Fiber", 20, "g");
-            dgvAnalysis.DataSource = dt;
+            // Series 1: Trung bình
+            Series avgSeries = new Series("Thực tế (Trung bình)");
+            avgSeries.ChartType = SeriesChartType.Column;
+            avgSeries.Points.AddXY("Calories", avgCalories);
+            avgSeries.Points.AddXY("Protein", avgProtein);
+            avgSeries.Points.AddXY("Carbs", avgCarbs);
+            avgSeries.Points.AddXY("Fat", avgFat);
+            avgSeries.Points.AddXY("Fiber", avgFiber);
+
+            // Series 2: Tiêu chuẩn
+            Series stdSeries = new Series("Tiêu chuẩn yêu cầu");
+            stdSeries.ChartType = SeriesChartType.Column;
+            stdSeries.Points.AddXY("Calories", standard.Calories);
+            stdSeries.Points.AddXY("Protein", standard.Protein);
+            stdSeries.Points.AddXY("Carbs", standard.Carbs);
+            stdSeries.Points.AddXY("Fat", standard.Fat);
+            stdSeries.Points.AddXY("Fiber", standard.Fiber);
+
+            // Thêm series vào chart
+            chartNutrition.Series.Add(avgSeries);
+            chartNutrition.Series.Add(stdSeries);
+
+            // Giao diện biểu đồ
+            chartNutrition.Titles.Add("SO SÁNH DINH DƯỠNG THỰC TẾ VÀ TIÊU CHUẨN");
+            chartNutrition.ChartAreas["MainArea"].AxisX.Title = "Chỉ số";
+            chartNutrition.ChartAreas["MainArea"].AxisY.Title = "Giá trị";
         }
+
+
+
 
         private void dgvAnalysis_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
