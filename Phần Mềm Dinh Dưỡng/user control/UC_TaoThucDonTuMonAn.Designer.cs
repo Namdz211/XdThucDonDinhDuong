@@ -33,6 +33,7 @@
             this.dgvThucDonMonAn = new System.Windows.Forms.DataGridView();
             this.btnLuu = new Guna.UI2.WinForms.Guna2Button();
             this.btnMonAn = new Guna.UI2.WinForms.Guna2Button();
+            this.btnPhanTichDinhDuong = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvThucDonMonAn)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +86,7 @@
             this.btnLuu.FillColor = System.Drawing.Color.Red;
             this.btnLuu.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLuu.ForeColor = System.Drawing.Color.White;
-            this.btnLuu.Location = new System.Drawing.Point(837, 765);
+            this.btnLuu.Location = new System.Drawing.Point(940, 765);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(180, 45);
             this.btnLuu.TabIndex = 8;
@@ -108,10 +109,27 @@
             this.btnMonAn.Text = "Xem danh sách món ăn";
             this.btnMonAn.Click += new System.EventHandler(this.btnMonAn_Click);
             // 
+            // btnPhanTichDinhDuong
+            // 
+            this.btnPhanTichDinhDuong.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.btnPhanTichDinhDuong.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.btnPhanTichDinhDuong.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.btnPhanTichDinhDuong.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.btnPhanTichDinhDuong.FillColor = System.Drawing.Color.DodgerBlue;
+            this.btnPhanTichDinhDuong.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.btnPhanTichDinhDuong.ForeColor = System.Drawing.Color.White;
+            this.btnPhanTichDinhDuong.Location = new System.Drawing.Point(640, 765);
+            this.btnPhanTichDinhDuong.Name = "btnPhanTichDinhDuong";
+            this.btnPhanTichDinhDuong.Size = new System.Drawing.Size(180, 45);
+            this.btnPhanTichDinhDuong.TabIndex = 10;
+            this.btnPhanTichDinhDuong.Text = "Phân tích dinh dưỡng";
+            this.btnPhanTichDinhDuong.Click += new System.EventHandler(this.btnPhanTichDinhDuong_Click);
+            // 
             // UC_TaoThucDonTuMonAn
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.btnPhanTichDinhDuong);
             this.Controls.Add(this.btnMonAn);
             this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.dgvThucDonMonAn);
@@ -133,5 +151,6 @@
         private System.Windows.Forms.DataGridView dgvThucDonMonAn;
         private Guna.UI2.WinForms.Guna2Button btnLuu;
         private Guna.UI2.WinForms.Guna2Button btnMonAn;
+        private Guna.UI2.WinForms.Guna2Button btnPhanTichDinhDuong;
     }
 }

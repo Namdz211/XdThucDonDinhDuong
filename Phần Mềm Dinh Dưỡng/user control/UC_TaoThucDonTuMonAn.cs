@@ -12,6 +12,7 @@ using Phần_Mềm_Dinh_Dưỡng.Form_Quản_Lý_Chung;
 
 namespace Phần_Mềm_Dinh_Dưỡng.user_control
 {
+   
     public partial class UC_TaoThucDonTuMonAn: UserControl
     {
         // 🔹 Định nghĩa chuỗi kết nối trước
@@ -179,6 +180,145 @@ namespace Phần_Mềm_Dinh_Dưỡng.user_control
         {
             FormDsMonAn dsMonAn= new FormDsMonAn();
             dsMonAn.Show();
+        }
+        private NutritionInfo GetStandardNutrition(string nhomTre)
+        {
+            return new NutritionInfo
+            {
+                Calories = nhomTre == "Nhóm mẫu giáo" ? 1200 : 900,
+                Protein = nhomTre == "Nhóm mẫu giáo" ? 30 : 25,
+                Carbs = nhomTre == "Nhóm mẫu giáo" ? 150 : 120,
+                Fat = nhomTre == "Nhóm mẫu giáo" ? 40 : 30,
+                Fiber = nhomTre == "Nhóm mẫu giáo" ? 15 : 10
+            };
+        }
+
+
+        private void btnPhanTichDinhDuong_Click(object sender, EventArgs e)
+        {
+            if (dgvThucDonMonAn.Rows.Count == 0)
+            {
+                MessageBox.Show("Vui lòng tạo thực đơn trước khi phân tích");
+                return;
+            }
+
+            // Tạo DataTable để lưu kết quả phân tích
+            DataTable dtAnalysis = new DataTable();
+            dtAnalysis.Columns.Add("Ngày");
+            dtAnalysis.Columns.Add("Calories", typeof(double));
+            dtAnalysis.Columns.Add("Protein (g)", typeof(double));
+            dtAnalysis.Columns.Add("Carbs (g)", typeof(double));
+            dtAnalysis.Columns.Add("Fat (g)", typeof(double));
+            dtAnalysis.Columns.Add("Fiber (g)", typeof(double));
+
+            // Phân tích từng ngày trong thực đơn
+            foreach (DataGridViewRow row in dgvThucDonMonAn.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                double dayCalories = 0;
+                double dayProtein = 0;
+                double dayCarbs = 0;
+                double dayFat = 0;
+                double dayFiber = 0;
+
+                string thu = row.Cells["Thu"].Value.ToString();
+
+                // Phân tích từng bữa ăn
+                foreach (DataGridViewCell cell in row.Cells)
+                {
+                    if (cell is DataGridViewComboBoxCell comboBoxCell && comboBoxCell.Value != null)
+                    {
+                        string maMon = comboBoxCell.Value.ToString();
+                        var nutrition = GetDinhDuong(maMon);
+
+                        dayCalories += nutrition.Calories;
+                        dayProtein += nutrition.Protein;
+                        dayCarbs += nutrition.Carbs;
+                        dayFat += nutrition.Fat;
+                        dayFiber += nutrition.Fiber;
+                    }
+                }
+
+                dtAnalysis.Rows.Add(thu, dayCalories, dayProtein, dayCarbs, dayFat, dayFiber);
+            }
+
+            // Lấy tiêu chuẩn dinh dưỡng
+            var standard = GetStandardNutrition(cboNhomTre.SelectedItem.ToString());
+
+            // Tạo bảng so sánh
+            DataTable dtComparison = CreateComparisonTable(dtAnalysis, standard);
+
+            // Hiển thị kết quả
+            FormKtraDinhDuong resultForm = new FormKtraDinhDuong(dtAnalysis, dtComparison);
+            resultForm.Show();
+        }
+      
+
+        private DinhDuong GetDinhDuong(string maMon)
+        {
+            DinhDuong info = new DinhDuong();
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                string query = "SELECT Calories, Protein, Carbohydrates, Fat, Fiber FROM MonAn WHERE MaMon = @MaMon";
+                SqlCommand cmd = new SqlCommand(query, conn);
+                cmd.Parameters.AddWithValue("@MaMon", maMon);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read())
+                {
+                    info.Calories = reader.IsDBNull(0) ? 0 : Convert.ToDouble(reader["Calories"]);
+                    info.Protein = reader.IsDBNull(1) ? 0 : Convert.ToDouble(reader["Protein"]);
+                    info.Carbs = reader.IsDBNull(2) ? 0 : Convert.ToDouble(reader["Carbohydrates"]);
+                    info.Fat = reader.IsDBNull(3) ? 0 : Convert.ToDouble(reader["Fat"]);
+                    info.Fiber = reader.IsDBNull(4) ? 0 : Convert.ToDouble(reader["Fiber"]);
+                }
+            }
+
+            return info;
+        }
+        private DataTable CreateComparisonTable(DataTable analysisData, NutritionInfo standard)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Ngày");
+            dt.Columns.Add("Calories");
+            dt.Columns.Add("Protein");
+            dt.Columns.Add("Carbs");
+            dt.Columns.Add("Fat");
+            dt.Columns.Add("Fiber");
+            dt.Columns.Add("Đánh giá");
+
+            foreach (DataRow row in analysisData.Rows)
+            {
+                var dailyNutrition = new NutritionInfo
+                {
+                    Calories = Convert.ToDouble(row["Calories"]),
+                    Protein = Convert.ToDouble(row["Protein (g)"]),
+                    Carbs = Convert.ToDouble(row["Carbs (g)"]),
+                    Fat = Convert.ToDouble(row["Fat (g)"]),
+                    Fiber = Convert.ToDouble(row["Fiber (g)"])
+                };
+
+                var comparison = dailyNutrition.CompareWithStandard(standard);
+
+                // Đánh giá chung
+                string danhGia = (dailyNutrition.Calories >= standard.Calories * 0.9) ? "Đạt" : "Thiếu";
+
+                dt.Rows.Add(
+                    row["Ngày"],
+                    comparison["Calories"],
+                    comparison["Protein"],
+                    comparison["Carbs"],
+                    comparison["Fat"],
+                    comparison["Fiber"],
+                    danhGia
+                );
+            }
+
+            return dt;
         }
     }
 }

@@ -50,5 +50,12 @@ namespace Phần_Mềm_Dinh_Dưỡng
             uC_TaoThucDonTuMonAn1.Visible = true;
             uC_TaoThucDonTuMonAn1.BringToFront();
         }
+
+        private void btnKtraDD_Click(object sender, EventArgs e)
+        {
+       
+            
+        }
+    
     }
 }

@@ -128,6 +128,7 @@
             this.btnKtraDD.Size = new System.Drawing.Size(295, 50);
             this.btnKtraDD.TabIndex = 4;
             this.btnKtraDD.Text = "KIỂM TRA DINH DƯỠNG CỦA THỰC ĐƠN";
+            this.btnKtraDD.Click += new System.EventHandler(this.btnKtraDD_Click);
             // 
             // btnNguyenLieu
             // 
